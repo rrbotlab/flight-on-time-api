@@ -27,7 +27,7 @@ public class SecurityConfigurations {
     private SecurityFilter securityFilter;
 
     public static final String [] ENDPOINTS_POST_NO_AUTH = {"/login", "/predict"};
-    public static final String [] ENDPOINTS_GET_NO_AUTH = {"/", "/check/**", "/h2-console/**", "/generate_204", "/actuator/**"};
+    public static final String [] ENDPOINTS_GET_NO_AUTH = {"/", "/check/**", "/h2-console/**", "/generate_204", "/actuator/**", "/gerar-senha"};
     public static final String [] ENDPOINTS_SWAGGER = {"/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**"};
     public static final String [] ENDPOINTS_ADMIN = {"/admin", "/usuarios/**"};
 
@@ -35,6 +35,7 @@ public class SecurityConfigurations {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         log.info("SecurityConfigurations.SecurityFilterChain");
         return http.csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> {})
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(HttpMethod.POST, ENDPOINTS_POST_NO_AUTH).permitAll();
