@@ -8,11 +8,13 @@ import com.flightontime.flightapi.infra.client.datascience.dto.DataScienceApiRes
 
 public class FlightPredictionMapper {
 
-    public static DataScienceApiRequest toDsApiRequest(FlightRequest flightRequest) {
+    public static DataScienceApiRequest toDsApiRequest(
+            FlightRequest flightRequest, String airportOriginName, String airportDestinationName
+    ) {
         DataScienceApiRequest apiRequest = new DataScienceApiRequest(
                 flightRequest.companhia(),
-                flightRequest.origem(),
-                flightRequest.destino(),
+                airportOriginName,
+                airportDestinationName,
                 flightRequest.dataPartida()
         );
         return apiRequest;

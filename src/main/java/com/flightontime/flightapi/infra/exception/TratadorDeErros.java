@@ -1,5 +1,6 @@
 package com.flightontime.flightapi.infra.exception;
 
+import com.flightontime.flightapi.domain.AirportNotFoundException;
 import com.flightontime.flightapi.domain.AutorizacaoException;
 import com.flightontime.flightapi.domain.DataScienceApiOfflineException;
 import com.flightontime.flightapi.domain.ValidacaoException;
@@ -68,6 +69,11 @@ public class TratadorDeErros {
     @ExceptionHandler(DataScienceApiOfflineException.class)
     public ResponseEntity<ExceptionMensagemDados> handleDataScienceApiOffline(DataScienceApiOfflineException ex) {
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(new ExceptionMensagemDados(ex.getMessage()));
+    }
+
+    @ExceptionHandler(AirportNotFoundException.class)
+    public ResponseEntity<ExceptionMensagemDados> handleAirportNotFound(AirportNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ExceptionMensagemDados(ex.getMessage()));
     }
 
     private record ErroValidacaoDados(String campo, String mensagem) {
