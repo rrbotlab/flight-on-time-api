@@ -9,10 +9,10 @@ import com.flightontime.flightapi.infra.client.datascience.dto.DataScienceApiRes
 public class FlightPredictionMapper {
 
     public static DataScienceApiRequest toDsApiRequest(
-            FlightRequest flightRequest, String airportOriginName, String airportDestinationName
+            FlightRequest flightRequest, String airlineName, String airportOriginName, String airportDestinationName
     ) {
         DataScienceApiRequest apiRequest = new DataScienceApiRequest(
-                flightRequest.airline(),
+                airlineName,
                 airportOriginName,
                 airportDestinationName,
                 flightRequest.departureDate()

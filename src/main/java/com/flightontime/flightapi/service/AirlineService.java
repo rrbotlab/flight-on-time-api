@@ -24,5 +24,10 @@ public class AirlineService {
                 .toList();
     }
 
+    public AirlineResponse getAirlineByName(String name) {
+        return repository.findByName(name)
+                .map(a -> new AirlineResponse(a.getName()))
+                .orElseThrow(() -> new AirlineNotFoundException("Companhia aérea não encontrada"));
+    }
 
 }

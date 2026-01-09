@@ -1,9 +1,6 @@
 package com.flightontime.flightapi.infra.exception;
 
-import com.flightontime.flightapi.domain.exception.AirportNotFoundException;
-import com.flightontime.flightapi.domain.exception.AuthorizationException;
-import com.flightontime.flightapi.domain.exception.DataScienceApiOfflineException;
-import com.flightontime.flightapi.domain.exception.ValidationException;
+import com.flightontime.flightapi.domain.exception.*;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -73,6 +70,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AirportNotFoundException.class)
     public ResponseEntity<ExceptionMessageResponse> handleAirportNotFound(AirportNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ExceptionMessageResponse(ex.getMessage()));
+    }
+
+    @ExceptionHandler(AirlineNotFoundException.class)
+    public ResponseEntity<ExceptionMessageResponse> handleAirlineNotFound(AirlineNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ExceptionMessageResponse(ex.getMessage()));
     }
 
